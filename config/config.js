@@ -2,7 +2,7 @@ const extend = require('extend');
 
 let conf = {
 	projectName: 'YoasimBot',
-	port: 30001
+	port: process.env.port || 30001
 };
 
 if (process.argv.length > 2 && process.argv[2] == 'dev') {
