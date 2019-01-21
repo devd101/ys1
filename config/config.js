@@ -8,7 +8,7 @@ if (process.env.weblisten && process.env.weblisten == 'false') {
 
 let conf = {
 	projectName: 'YoasimBot',
-	port: process.env.port || 30001,
+	port: process.env.PORT || 30001,
 	webListen: webListen
 };
 
