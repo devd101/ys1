@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <script src="js/lib/jquery-3.3.1.min.js"></script>
+    <script src="js/lib/handlebars-v4.0.12.js"></script>
+</head>
+
+<body>
+    <div id='target'></div>
+
+    <script id="main" type="template/handlebars">
+        <h1>
+            {{projectName}}
+        </H1>
+        <table border="1">
+                <tr>
+                    <th>
+                        username
+                    </th>
+                    <th>
+                        number of calls
+                    </th>
+                    <th>
+                        last call
+                    </th>
+                </tr>
+                {{#each users}}
+                    <tr>
+                        <td>
+                            {{@key}}
+                        </td>
+                        <td>
+                            {{this.numberOfCalls}}
+                        </td>
+                        <td>
+                            {{this.lastCall}}
+                        </td>
+                    </tr>
+                {{/each}}  
+        </table>    
+    </script>
+    <script>
+        $(function () {
+            $.getJSON('/stats/data')
+                .done(function (data) {
+                    console.log(data);
+                    let template = Handlebars.compile($('#main').html());
+                    var html = template(data);
+                    $('#target').html(html);
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -11,6 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "telegraf": "^3.22.2",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-content-length-validator": "^1.0.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "extend": "^3.0.2",
+    "helmet": "^3.13.0",
+    "hpp": "^0.2.2"
   }
 }
