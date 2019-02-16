@@ -41,13 +41,13 @@ parseString(xmlTxt, { trim: true, explicitArray: false }, (err, result) => {
 
 const bot = new Telegraf(Ttoken)
 
-const stats=require('../stats/stats.js');
+const stats = require('../stats/stats.js');
 // bot middleware
 bot.use(function (ctx, next) {
 	// console.log('username: ', ctx.from.username);
 	stats.addBotCall(ctx);
 
-	
+
 	return next();
 });
 
@@ -55,11 +55,16 @@ const mainKeyboard = Markup.inlineKeyboard([
 	// Markup.urlButton('❤️', 'http://telegraf.js.org'),
 
 	// Markup.urlButton('ידיעון', 'https://t.me/Yoasim'),
-	Markup.urlButton('ידיעון', getConfig('yedionUrl')),
 
-	Markup.callbackButton('שאלות ותשובות', 'qna1'),
+	Markup.callbackButton('כניסה לקבוצות', 'groups'),
 
-	Markup.callbackButton('תרפיה ואינטגרציה', 'terapia'),
+
+	Markup.urlButton('ידיעון - מידע ועדכונים', getConfig('yedionUrl')),
+
+	// Markup.callbackButton('שאלות ותשובות', 'qna1'),
+
+	// Markup.callbackButton('תרפיה ואינטגרציה', 'terapia'),
+
 	Markup.callbackButton('תרומה/עזרה', 'truma')
 ],
 	{
@@ -79,6 +84,25 @@ bot.action('restart', (ctx) => {
 bot.action('restartNoEdit', (ctx) => {
 	ctx.reply('ברוכים הבאים לפרויקט יוע"סים!', Extra.markup(mainKeyboard));
 });
+
+
+// ******************************** groups ********************************
+bot.action('groups', (ctx) => {
+	ctx.editMessageText(txtData.groups,
+		Extra.markup(
+			Markup.inlineKeyboard([
+				Markup.callbackButton('הקבוצה הראשית', 'qna1'),
+				Markup.callbackButton('תרפיה ואינטגרציה', 'terapia'),
+				Markup.callbackButton('לתפריט הראשי', 'restart')
+
+			],
+				{
+					columns: 1
+				})
+		)
+	)
+});
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
