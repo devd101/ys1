@@ -1,6 +1,6 @@
 "use strict";
 const stats = require('../stats/stats.js');
-
+const indata = require('../indata/index.js');
 (function (mdl) {
 
     let testData = {
@@ -24,6 +24,34 @@ const stats = require('../stats/stats.js');
             //     intakeWeb: '1.0',
             //     db: "1.0"
             // });
-        })
+        });
+
+        app.get('/stats/botLog', (req, res) => {
+            indata.logStore.getBotLog(function (logs, err) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let converter = require('json-2-csv');
+                    converter.json2csv(logs, function (err, csv) {
+                        console.log('csv', csv);
+                        if (err) {
+                            res.status(500).send('error creating csv:' + err);
+                        } else {
+                            res.set({ "Content-Disposition": 'attachment; filename="botlog.csv"' });
+                            res.send(csv);
+                        }
+                    }, {
+                            keys: [
+                                'username',
+                                'message',
+                                'createdAt'
+                            ]
+                        });
+                }
+            });
+        });
+
     }
+
+
 })(module.exports)
