@@ -16,7 +16,7 @@ indata.init(function(err){
             useSession: true,
             sessionSecret: 'yoasimBot.web.SecretSecret123',
             secure: {
-                isHelmet: false,
+                isHelmet: true,
                 isHpp: true,
                 maxContentLength: 999 // set to 0 to accept any content length.
             },
