@@ -44,8 +44,11 @@ const bot = new Telegraf(Ttoken)
 const stats = require('../stats/stats.js');
 // bot middleware
 bot.use(function (ctx, next) {
-	// console.log('username: ', ctx.from.username);
-	stats.addBotCall(ctx);
+	// console.log(ctx);
+	// console.log('username: ', ctx.update.callback_query.from);
+
+	// 14.03.2021: REMOVE use of stats module for now - it was changed and made a bug...
+	// stats.addBotCall(ctx);
 
 
 	return next();
